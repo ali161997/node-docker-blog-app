@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  nginx:
+    ports:
+      - '3000:80'
+  node-app:
+    build:
+      context: .
+      args:
+        NODE_ENV: development
+    volumes:
+      - './:/app'
+      - '/app/node_modules'
+    environment:
+      - NODE_ENV=development
+      - MONGO_USER=myDB
+      - MONGO_PASSWORD=myPassword
+      - SESSION_SECRET=alihashem
+      - REDIS_USER=alihashem
+      - REDIS_PASSWORD=alihashem
+    command: npm run dev
