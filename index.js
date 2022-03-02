@@ -21,7 +21,6 @@ const userRouter = require('./routes/userRoute');
 const app = express();
 const port = process.env.PORT || 3000;
 const mongoURL = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin`;
-console.log(REDIS_IP);
 const redisClient = redis.createClient({
   legacyMode: true,
   url: `redis://${REDIS_IP}:${REDIS_PORT}`,
@@ -45,7 +44,7 @@ const connectWithRetry = () => {
       }, 5000);
     });
 };
-const retryConnecting = () => {
+const retryConnectingRedis = () => {
   redisClient
     .connect((va) => {
       console.log(va);
@@ -61,7 +60,7 @@ const retryConnecting = () => {
       }, 5000);
     });
 };
-retryConnecting();
+// retryConnectingRedis();
 connectWithRetry();
 app.enable('trust proxy');
 app.use(
@@ -88,4 +87,6 @@ app.get('/api/v1', (req, res) => {
 });
 app.use('/api/v1/posts', postRouter);
 app.use('/api/v1/users', userRouter);
-app.listen(port, (_) => console.log(`Example app listening on port ${port}!`));
+app.listen(port, (res) =>
+  console.log(`Example app listening on port${res}- ${port}!`)
+);

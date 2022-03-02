@@ -4,6 +4,8 @@ services:
     ports:
       - '80:80'
   node-app:
+    # env_file:
+    #   - .env
     build:
       context: .
       args:
