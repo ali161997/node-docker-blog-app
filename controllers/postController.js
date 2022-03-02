@@ -29,6 +29,7 @@ exports.getOnePost = async (req, res, next) => {
   } catch (error) {
     res.status(400).json({
       status: 'fail',
+      error,
     });
   }
 };
@@ -44,6 +45,7 @@ exports.createPost = async (req, res, next) => {
   } catch (error) {
     res.status(400).json({
       status: 'fail',
+      error,
     });
   }
 };

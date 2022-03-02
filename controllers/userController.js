@@ -4,10 +4,12 @@ exports.createUser = async (req, res) => {
   try {
     const { name, password } = req.body;
     const hashPassword = await bycrypt.hash(password, 12);
+
     const newUser = await user.create({
       name,
       password: hashPassword,
     });
+    console.log(newUser);
     req.session.user = newUser;
     res.status(201).json({
       status: 'successful',
@@ -18,6 +20,7 @@ exports.createUser = async (req, res) => {
   } catch (e) {
     res.status(400).json({
       status: 'fail',
+      error: e,
     });
   }
 };
@@ -50,6 +53,7 @@ exports.login = async (req, res) => {
   } catch (e) {
     res.status(400).json({
       status: 'fail',
+      error: e,
     });
   }
 };
