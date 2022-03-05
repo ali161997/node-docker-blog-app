@@ -27,6 +27,7 @@ exports.createUser = async (req, res) => {
 exports.login = async (req, res) => {
   try {
     const { name, password } = req.body;
+    
     const found = await user.findOne({ name });
     if (!found) {
       res.status(400).json({

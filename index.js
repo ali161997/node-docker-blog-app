@@ -33,6 +33,7 @@ const connectWithRetry = () => {
     .connect(mongoURL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
+      useFindAndModify: false,
     })
     .then((_) => {
       console.log('connected to Db again ');
@@ -62,7 +63,6 @@ const retryConnectingRedis = () => {
 };
 // retryConnectingRedis();
 connectWithRetry();
-app.enable('trust proxy');
 app.use(
   session({
     store: new redisStore({

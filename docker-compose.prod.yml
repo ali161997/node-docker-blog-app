@@ -19,6 +19,10 @@ services:
       - REDIS_PASSWORD=${REDIS_PASSWORD}
     command: node index.js
   mongo:
+    volumes:
+      - mongodata:/data/db
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+volumes:
+  mongodata:
