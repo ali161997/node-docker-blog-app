@@ -35,12 +35,12 @@ const connectWithRetry = () => {
       useUnifiedTopology: true,
     })
     .then((_) => {
-      console.log('connected to Db again ');
+      console.log('connected to mongodb !!!! ');
     })
     .catch((e) => {
       console.log('can not connect to db', e);
       setTimeout(() => {
-        connectWithRetry;
+        connectWithRetry();
       }, 5000);
     });
 };
